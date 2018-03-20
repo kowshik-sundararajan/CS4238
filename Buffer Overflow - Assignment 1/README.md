@@ -209,8 +209,7 @@ Segmentation fault (core dumped)
 ## Task 4: Non-executable stack
 
 ###	Explanation of the non-executable stack mechanism
-	To prevent certain buffer-overflow attacks, virtual address space can be marked
-non-executable (using the NX bit - no execute bit) - thus rendering the stack non-executable. This would prevent any attack code that is injected into the stack from being executed.
+To prevent certain buffer-overflow attacks, virtual address space can be marked non-executable (using the NX bit - no execute bit) - thus rendering the stack non-executable. This would prevent any attack code that is injected into the stack from being executed.
 
 ```
 $ sudo gcc -g -o stack -fno-stack-protector stack.c
@@ -226,8 +225,6 @@ Segmentation fault (core dumped)
 We can break up the string "/bin/sh" into two values such that when the values are xored during execution, they will return the intended "//sh" and "/bin" strings. This way, the string "/bin/sh" is not hardcoded into the shellcode array.
 
 ### Write an obfuscated shellcode that does not contain "bin/sh" string
-You will need to also explain how you generate the shellcode and the logic behind it.
-
 To carry out the idea described in 5.1, I first converted the shellcode into assembly code:
 
 ```
@@ -263,7 +260,7 @@ Finally, we replace the hardcoded "/bin/sh" in the shellcode to use our newly ge
 is replaced with the newly generated hex opcodes.
 
 
-## Output
+### Output
 ```
 $ sudo execstack -s stack
 $ gcc -o exploit_obfuscated exploit_obfuscated.c
